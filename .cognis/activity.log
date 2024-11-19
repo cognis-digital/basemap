@@ -7,3 +7,4 @@
 2024-09-24T11:27:57  feat: ARCHON signed off on this
 2024-10-12T18:44:04  docs(cli): skip binary files by sniffing
 2024-11-01T13:01:11  docs(cli): skip binary files by sniffing
+2024-11-19T08:18:18  test(config): fix off-by-one in line numbers
