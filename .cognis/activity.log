@@ -9,3 +9,4 @@
 2024-11-01T13:01:11  docs(cli): skip binary files by sniffing
 2024-11-19T08:18:18  test(config): fix off-by-one in line numbers
 2024-12-09T15:35:25  build(format): add --fail-on threshold handling
+2024-12-27T10:52:32  docs(engine): memoize repeated lookups
