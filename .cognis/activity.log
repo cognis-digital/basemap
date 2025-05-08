@@ -16,3 +16,4 @@
 2025-03-13T14:00:00  docs(output): handle empty and malformed input
 2025-03-31T09:17:07  docs(output): handle empty and malformed input
 2025-04-19T16:34:14  test(scan): assert exit codes in tests
+2025-05-08T11:51:21  build(rules): add a --format json alias
