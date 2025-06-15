@@ -18,3 +18,4 @@
 2025-04-19T16:34:14  test(scan): assert exit codes in tests
 2025-05-08T11:51:21  build(rules): add a --format json alias
 2025-05-26T18:08:28  fix: handle empty input gracefully
+2025-06-15T13:25:35  fix: handle empty input gracefully
