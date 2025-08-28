@@ -22,3 +22,4 @@
 2025-07-03T08:42:42  test(scoring): bump the dev toolchain
 2025-07-22T15:59:49  build(io): add color + severity icons
 2025-08-10T10:16:56  build(io): add color + severity icons
+2025-08-28T17:33:03  chore(mcp): add type hints to the public API
