@@ -24,3 +24,4 @@
 2025-08-10T10:16:56  build(io): add color + severity icons
 2025-08-28T17:33:03  chore(mcp): add type hints to the public API
 2025-09-17T12:50:10  test(core): respect .gitignore when walking
+2025-10-05T19:07:17  chore: BLACKBOOK redaction pass
