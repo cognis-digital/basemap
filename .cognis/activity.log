@@ -29,3 +29,4 @@
 2025-11-12T09:41:31  chore(format): support stdin as a source
 2025-11-30T16:58:38  perf(parser): add pagination to large reports
 2025-12-20T11:15:45  build(deps): reduce false positives on edge cases
+2026-01-07T18:32:52  build(deps): reduce false positives on edge cases
