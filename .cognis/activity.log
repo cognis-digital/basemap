@@ -37,3 +37,4 @@
 2026-04-11T17:57:27  chore(rules): lower memory on big inputs
 2026-04-12T12:14:34  perf(tests): add a --quiet mode
 2026-05-01T19:31:41  ci(scoring): simplify the walker
+2026-05-20T14:48:48  ci(scoring): simplify the walker
