@@ -1,0 +1,64 @@
+{
+  "installations": [
+    {
+      "id": "DEN-CIV-01",
+      "name": "Denver Metro Reference Point",
+      "lat": 39.7392,
+      "lon": -104.9903,
+      "category": "reference",
+      "country": "US",
+      "coverage_km": 50,
+      "tags": ["civil", "conus-west"]
+    },
+    {
+      "id": "COS-CIV-02",
+      "name": "Colorado Springs Reference Point",
+      "lat": 38.8339,
+      "lon": -104.8214,
+      "category": "reference",
+      "country": "US",
+      "coverage_km": 60,
+      "tags": ["civil", "conus-west"]
+    },
+    {
+      "id": "CYS-CIV-03",
+      "name": "Cheyenne Reference Point",
+      "lat": 41.1400,
+      "lon": -104.8202,
+      "category": "reference",
+      "country": "US",
+      "coverage_km": 80,
+      "tags": ["civil", "conus-west"]
+    },
+    {
+      "id": "GJT-CIV-04",
+      "name": "Grand Junction Reference Point",
+      "lat": 39.1222,
+      "lon": -108.5267,
+      "category": "reference",
+      "country": "US",
+      "coverage_km": 90,
+      "tags": ["civil", "conus-west"]
+    },
+    {
+      "id": "DCA-CIV-05",
+      "name": "Washington DC Reference Point",
+      "lat": 38.8512,
+      "lon": -77.0402,
+      "category": "reference",
+      "country": "US",
+      "coverage_km": 70,
+      "tags": ["civil", "conus-east"]
+    },
+    {
+      "id": "RAM-CIV-06",
+      "name": "Ramstein Area Reference Point",
+      "lat": 49.4369,
+      "lon": 7.6003,
+      "category": "reference",
+      "country": "DE",
+      "coverage_km": 100,
+      "tags": ["civil", "europe"]
+    }
+  ]
+}
