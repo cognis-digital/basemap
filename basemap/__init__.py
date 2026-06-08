@@ -1,2 +1,11 @@
-"""BASEMAP — Build and query a structured catalog of installations/AOIs with distance, sector, and coverage queries."""
-__version__ = "0.1.0"
+"""basemap — part of the Cognis Neural Suite."""
+try:  # re-export the tool's public API + identity from core
+    from basemap.core import *  # noqa: F401,F403
+except Exception:  # pragma: no cover
+    pass
+try:
+    from basemap.core import TOOL_NAME, TOOL_VERSION
+except Exception:  # pragma: no cover
+    TOOL_NAME = "basemap"
+    TOOL_VERSION = "0.1.0"
+__version__ = TOOL_VERSION
