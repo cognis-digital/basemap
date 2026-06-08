@@ -1,0 +1,10 @@
+{
+  "name": "@cognis/basemap",
+  "version": "0.2.0",
+  "description": "JavaScript port of basemap (Cognis Neural Suite)",
+  "bin": {
+    "basemap": "index.js"
+  },
+  "license": "LicenseRef-COCL-1.0",
+  "type": "module"
+}
