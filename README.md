@@ -20,6 +20,32 @@ pip install cognis-basemap
 basemap scan .            # → prioritized findings in seconds
 ```
 
+## Usage — step by step
+
+1. **Install** the CLI (console script `basemap`):
+   ```bash
+   pip install cognis-basemap
+   ```
+2. **List your catalog** — every query needs a catalog JSON via `-c/--catalog`:
+   ```bash
+   basemap -c catalog.json list
+   ```
+3. **Run a geospatial query** — rank by distance, filter by radius, bounding box, or bearing sector:
+   ```bash
+   basemap -c catalog.json nearest --lat 38.9 --lon -77.0 --limit 5
+   basemap -c catalog.json radius  --lat 38.9 --lon -77.0 --km 250
+   basemap -c catalog.json sector  --lat 38.9 --lon -77.0 --bearing 90 --width 30 --max-km 500
+   ```
+4. **Read the result** as JSON for downstream tooling (`--format` is global):
+   ```bash
+   basemap --format json -c catalog.json nearest --lat 38.9 --lon -77.0
+   ```
+5. **Automate in CI** — exit code 0 = ok, 1 = query/IO error, 2 = usage error:
+   ```yaml
+   - run: pip install cognis-basemap
+   - run: basemap --format json -c catalog.json bbox --min-lat 30 --min-lon -90 --max-lat 45 --max-lon -70 | tee aoi.json
+   ```
+
 ## Contents
 
 - [Why basemap?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
