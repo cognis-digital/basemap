@@ -1,5 +1,4 @@
 """Smoke tests for BASEMAP. Stdlib unittest, no network, no install."""
-import json
 import os
 import tempfile
 import unittest
