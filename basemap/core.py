@@ -134,6 +134,12 @@ class Catalog:
 
     @classmethod
     def from_records(cls, records: Iterable[dict]) -> "Catalog":
+        if records is None:
+            raise CatalogError("records must be an iterable of dicts, got None")
+        try:
+            iter(records)
+        except TypeError as exc:
+            raise CatalogError(f"records must be an iterable of dicts: {exc}") from exc
         cat = cls()
         for rec in records:
             if not isinstance(rec, dict):
@@ -152,6 +158,10 @@ class Catalog:
                 data = json.load(fh)
         except FileNotFoundError as exc:
             raise CatalogError(f"catalog file not found: {path}") from exc
+        except PermissionError as exc:
+            raise CatalogError(f"permission denied reading catalog: {path}") from exc
+        except OSError as exc:
+            raise CatalogError(f"cannot read catalog file {path}: {exc}") from exc
         except json.JSONDecodeError as exc:
             raise CatalogError(f"invalid JSON in {path}: {exc}") from exc
         if isinstance(data, dict) and "installations" in data:

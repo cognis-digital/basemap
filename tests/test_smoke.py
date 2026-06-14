@@ -163,5 +163,103 @@ class TestCLI(unittest.TestCase):
         self.assertEqual(rc, 1)
 
 
+class TestHardenedEdgeCases(unittest.TestCase):
+    """Tests covering hardened error/edge paths added during production review."""
+
+    # -- Catalog.load OSError variants -----------------------------------
+
+    def test_load_non_list_root_raises(self):
+        """A JSON object without an 'installations' key must raise CatalogError."""
+        fd, path = tempfile.mkstemp(suffix=".json")
+        try:
+            with os.fdopen(fd, "w") as fh:
+                fh.write('{"foo": 1}')
+            with self.assertRaises(CatalogError):
+                Catalog.load(path)
+        finally:
+            os.remove(path)
+
+    def test_load_scalar_json_raises(self):
+        """A JSON scalar (not array or object) must raise CatalogError."""
+        fd, path = tempfile.mkstemp(suffix=".json")
+        try:
+            with os.fdopen(fd, "w") as fh:
+                fh.write("42")
+            with self.assertRaises(CatalogError):
+                Catalog.load(path)
+        finally:
+            os.remove(path)
+
+    # -- Catalog.from_records input guards --------------------------------
+
+    def test_from_records_none_raises(self):
+        """Passing None to from_records must raise CatalogError."""
+        with self.assertRaises(CatalogError):
+            Catalog.from_records(None)
+
+    def test_from_records_non_iterable_raises(self):
+        """Passing a non-iterable (int) to from_records must raise CatalogError."""
+        with self.assertRaises(CatalogError):
+            Catalog.from_records(42)  # type: ignore[arg-type]
+
+    def test_from_records_non_dict_element_raises(self):
+        """A list with a non-dict element must raise CatalogError."""
+        with self.assertRaises(CatalogError):
+            Catalog.from_records(["not-a-dict"])
+
+    # -- Empty catalog behavior -------------------------------------------
+
+    def test_empty_catalog_nearest_returns_empty(self):
+        """nearest() on an empty catalog returns an empty list, not an error."""
+        cat = Catalog()
+        result = cat.nearest(0.0, 0.0, limit=5)
+        self.assertEqual(result, [])
+
+    def test_empty_catalog_radius_returns_empty(self):
+        """radius() on an empty catalog returns an empty list."""
+        cat = Catalog()
+        result = cat.radius(0.0, 0.0, 100.0)
+        self.assertEqual(result, [])
+
+    def test_empty_catalog_bbox_returns_empty(self):
+        """bbox() on an empty catalog returns an empty list."""
+        cat = Catalog()
+        result = cat.bbox(-90.0, -180.0, 90.0, 180.0)
+        self.assertEqual(result, [])
+
+    def test_empty_catalog_sector_returns_empty(self):
+        """sector() on an empty catalog returns an empty list."""
+        cat = Catalog()
+        result = cat.sector(0.0, 0.0, 90.0, 45.0)
+        self.assertEqual(result, [])
+
+    # -- CLI NaN/Inf coordinate rejection --------------------------------
+
+    def test_cli_nan_lat_returns_error(self):
+        """CLI must return exit code 1 for NaN latitude, not a raw traceback."""
+        rc = main(["-c", DEMO, "nearest", "--lat", "nan", "--lon", "0"])
+        self.assertEqual(rc, 1)
+
+    def test_cli_inf_lon_returns_error(self):
+        """CLI must return exit code 1 for Inf longitude."""
+        rc = main(["-c", DEMO, "nearest", "--lat", "0", "--lon", "inf"])
+        self.assertEqual(rc, 1)
+
+    # -- CLI missing catalog path ----------------------------------------
+
+    def test_cli_no_catalog_returns_error(self):
+        """CLI must return exit code 1 when --catalog is omitted."""
+        rc = main(["list"])
+        self.assertEqual(rc, 1)
+
+    # -- mcp_server module imports cleanly --------------------------------
+
+    def test_mcp_server_importable(self):
+        """mcp_server must be importable without ImportError."""
+        import importlib
+        mod = importlib.import_module("basemap.mcp_server")
+        self.assertTrue(callable(getattr(mod, "serve", None)))
+
+
 if __name__ == "__main__":
     unittest.main()
